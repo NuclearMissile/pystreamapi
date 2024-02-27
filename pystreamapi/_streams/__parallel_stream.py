@@ -21,7 +21,8 @@ class ParallelStream(stream.BaseStream):
         self._parallelizer = Parallelizer()
 
     def _init_parallelizer(self):
-        self._parallelizer = Parallelizer()
+        if getattr(self, "_parallelizer", None) is None:
+            self._parallelizer = Parallelizer()
 
     @terminal
     def all_match(self, predicate: Callable[[Any], bool]):
